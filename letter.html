@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Will you be my valentine?</title>
+    <link rel="stylesheet" href="letter.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script defer src="letter.js"></script>
+  </head>
+  <body>
+    <div id="envelope">
+      <img
+        onclick="openEnvelope()"
+        class="envelope-img"
+        src="assets/envelope.png"
+        alt=""
+      />
+      <p class="envelope-text">💖 Letter for You 💖</p>
+    </div>
+
+    <div hidden id="letter">
+      <div class="letter-container">
+        <p id="easter-egg" class="easter-egg">
+          made with love (and no girlfriend) by Xyros_y
+        </p>
+
+        <img class="letter-window" src="assets/letter/heart-3.png" alt="" />
+
+        <p class="letter-title">Will you be my valentine?</p>
+
+        <img
+          onclick="updateEasterEgg()"
+          class="letter-cat-heart"
+          src="assets/letter/cat_heart.gif"
+          alt=""
+        />
+      </div>
+
+      <div class="choice-buttons">
+        <img
+          class="choice-btn yes-btn"
+          src="assets/buttons/yes.png"
+          alt=""
+          onclick="onYes()"
+        />
+        <img
+          class="choice-btn no-btn"
+          src="assets/buttons/no.png"
+          alt=""
+          onclick="onNo()"
+        />
+      </div>
+    </div>
+  </body>
+</html>

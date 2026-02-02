@@ -1,0 +1,117 @@
+body {
+  font-family: "Pixelify Sans";
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  height: 100vh;
+  margin: 0;
+
+  font-size: 24px;
+
+  background-image: url("assets/heart-bg.jpg");
+}
+
+.envelope-img {
+  animation: pulse 1.5s infinite;
+  cursor: pointer;
+
+  width: 250px;
+}
+
+.envelope-text {
+  margin-top: 30px;
+}
+
+.letter-container {
+  display: inline-block;
+  position: relative;
+}
+
+.letter-window {
+  width: 450px;
+}
+
+.letter-title {
+  position: absolute;
+  width: 450px;
+
+  left: 52.5%;
+  top: 32%;
+
+  transform: translate(-50%, -50%);
+}
+
+.letter-cat-heart {
+  will-change: transform, opacity;
+  transform-origin: center;
+  position: absolute;
+  width: 150px;
+
+  left: 52.5%;
+  top: 60%;
+
+  image-rendering: pixelated;
+  cursor: pointer;
+
+  transform: translate(-50%, -50%);
+}
+
+.choice-buttons {
+  will-change: transform;
+  position: absolute;
+  display: flex;
+
+  left: 50%;
+  top: 80%;
+
+  gap: 24px;
+
+  transform: translateX(-50%);
+}
+
+.choice-btn {
+  image-rendering: pixelated;
+  position: relative;
+  cursor: pointer;
+
+  width: 60px;
+
+  transition: transform 0.15s ease;
+}
+
+.easter-egg {
+  pointer-events: none;
+  position: absolute;
+
+  color: #ff4d6d;
+
+  top: -17.5%;
+  left: 50%;
+
+  font-size: 14px;
+  opacity: 0;
+
+  transform: translateX(-50%);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@font-face {
+  font-family: "Pixelify Sans";
+  src: url("assets/font/PixelifySans.ttf");
+}
