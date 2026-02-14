@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💙 A Special Question For You 💙</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #0a1628;
+            --navy-mid: #132244;
+            --navy-light: #1b3a6b;
+            --accent-pink: #ff8fab;
+            --accent-coral: #ff6b8a;
+            --watermelon-green: #4ecb71;
+            --watermelon-red: #ff4d6d;
+            --jelly-purple: #c77dff;
+            --ice-cream-yellow: #ffe66d;
+            --glow-blue: #48cae4;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--navy);
+            color: #e0e8ff;
+            overflow-x: hidden;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><text y='20' font-size='20'>💙</text></svg>"), auto;
+        }
+
+        /* ===== STARS BACKGROUND ===== */
+        .stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--dur) ease-in-out infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* ===== BUBBLES ===== */
+        .bubbles-container {
+            position: fixed;
+            width: 100%; height: 100%;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .bubble {
+            position: absolute;
+            bottom: -80px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(72,202,228,0.3), rgba(72,202,228,0.05));
+            border: 1px solid rgba(72,202,228,0.2);
+            animation: riseBubble var(--dur) linear infinite;
+            animation-delay: var(--delay);
+        }
+        @keyframes riseBubble {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-50vh) translateX(30px) scale(1.1); opacity: 0.5; }
+            100% { transform: translateY(-110vh) translateX(-20px) scale(0.8); opacity: 0; }
+        }
+
+        /* ===== JELLYFISH ===== */
+        .jellyfish-container {
+            position: fixed;
+            width: 100%; height: 100%;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .jellyfish {
+            position: absolute;
+            animation: floatJelly var(--dur) ease-in-out infinite;
+            animation-delay: var(--delay);
+            filter: drop-shadow(0 0 15px rgba(199,125,255,0.4));
+        }
+        .jellyfish .head {
+            width: var(--size);
+            height: calc(var(--size) * 0.65);
+            background: radial-gradient(ellipse at 50% 40%, var(--jcolor2), var(--jcolor1));
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+            opacity: 0.7;
+        }
+        .jellyfish .head::after {
+            content: '';
+            position: absolute;
+            top: 20%; left: 25%;
+            width: 50%; height: 30%;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.4), transparent);
+            border-radius: 50%;
+        }
+        .jellyfish .tentacles {
+            display: flex;
+            justify-content: center;
+            gap: 3px;
+            margin-top: -5px;
+        }
+        .jellyfish .tentacle {
+            width: 3px;
+            height: calc(var(--size) * 0.8);
+            background: linear-gradient(to bottom, var(--jcolor1), transparent);
+            border-radius: 0 0 2px 2px;
+            animation: wiggleTentacle 2s ease-in-out infinite;
+            animation-delay: calc(var(--t) * 0.15s);
+            opacity: 0.6;
+        }
+        @keyframes wiggleTentacle {
+            0%, 100% { transform: translateX(0) scaleY(1); }
+            25% { transform: translateX(4px) scaleY(1.05); }
+            75% { transform: translateX(-4px) scaleY(0.95); }
+        }
+        @keyframes floatJelly {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-30px) translateX(15px) rotate(3deg); }
+            50% { transform: translateY(-10px) translateX(-10px) rotate(-2deg); }
+            75% { transform: translateY(-40px) translateX(5px) rotate(2deg); }
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            padding: 40px 20px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        #hero {
+            background: linear-gradient(180deg, #050d1a 0%, var(--navy) 40%, var(--navy-mid) 100%);
+        }
+        .hero-title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            background: linear-gradient(135deg, var(--glow-blue), var(--accent-pink), var(--jelly-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            animation: shimmer 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes shimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+        .hero-sub {
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            color: rgba(200, 215, 255, 0.8);
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        .scroll-indicator {
+            animation: bounce 2s ease-in-out infinite;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
+            position: relative;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(15px); }
+        }
+
+        /* ===== ENVELOPE INTRO ===== */
+        .envelope-icon {
+            font-size: 5rem;
+            animation: pulse 2s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* ===== THINGS I LOVE ABOUT YOU ===== */
+        #love-section {
+            background: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy) 50%, var(--navy-mid) 100%);
+        }
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: var(--glow-blue);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 900px;
+            width: 100%;
+        }
+        .love-card {
+            background: linear-gradient(135deg, rgba(27, 58, 107, 0.6), rgba(19, 34, 68, 0.8));
+            border: 1px solid rgba(72, 202, 228, 0.15);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            cursor: default;
+        }
+        .love-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: rgba(72, 202, 228, 0.5);
+            box-shadow: 0 15px 40px rgba(72, 202, 228, 0.15);
+        }
+        .love-card .emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .love-card .card-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(200, 215, 255, 0.85);
+        }
+
+        /* ===== JELLYFISH MESSAGE ===== */
+        #jellyfish-section {
+            background: linear-gradient(180deg, var(--navy-mid), #0d1f3c, var(--navy));
+        }
+        .big-jellyfish {
+            width: 160px;
+            margin: 0 auto 30px;
+            animation: floatGentle 4s ease-in-out infinite;
+        }
+        .big-jellyfish .head {
+            width: 160px;
+            height: 104px;
+            background: radial-gradient(ellipse at 50% 40%, rgba(199,125,255,0.9), rgba(72,202,228,0.6));
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+            box-shadow: 0 0 40px rgba(199,125,255,0.4);
+        }
+        .big-jellyfish .head::after {
+            content: '💙';
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+        }
+        .big-jellyfish .tentacles {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: -3px;
+        }
+        .big-jellyfish .tentacle {
+            width: 4px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(199,125,255,0.6), transparent);
+            border-radius: 0 0 3px 3px;
+            animation: wiggleTentacle 2.5s ease-in-out infinite;
+        }
+        .big-jellyfish .tentacle:nth-child(odd) { animation-delay: 0.3s; }
+        @keyframes floatGentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .jelly-message {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            text-align: center;
+            max-width: 600px;
+            line-height: 2;
+            color: rgba(200, 215, 255, 0.9);
+        }
+        .jelly-message .highlight {
+            color: var(--jelly-purple);
+            font-weight: 700;
+        }
+
+        /* ===== WATERMELON SECTION ===== */
+        #watermelon-section {
+            background: linear-gradient(180deg, var(--navy), var(--navy-mid), var(--navy));
+        }
+        .watermelon-slice {
+            width: 140px;
+            height: 70px;
+            background: linear-gradient(to bottom, var(--watermelon-red) 70%, var(--watermelon-green) 70%);
+            border-radius: 140px 140px 0 0;
+            position: relative;
+            margin: 0 auto 30px;
+            animation: wobble 3s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255,77,109,0.3);
+        }
+        .watermelon-slice::before {
+            content: '• • •';
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #1a1a2e;
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+        }
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .sweet-text {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            color: var(--watermelon-red);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .sweet-sub {
+            text-align: center;
+            font-size: 1.1rem;
+            color: rgba(200,215,255,0.75);
+            max-width: 500px;
+        }
+
+        /* ===== ICE CREAM SECTION ===== */
+        #icecream-section {
+            background: linear-gradient(180deg, var(--navy), #0f1d3a, var(--navy-mid));
+        }
+        .icecream-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .icecream {
+            text-align: center;
+            animation: floatGentle 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .icecream:nth-child(2) { animation-delay: 0.5s; }
+        .icecream:nth-child(3) { animation-delay: 1s; }
+        .icecream:hover { transform: scale(1.2) !important; }
+        .icecream .icon { font-size: 4rem; }
+        .icecream .flavor {
+            font-size: 0.9rem;
+            color: var(--ice-cream-yellow);
+            margin-top: 8px;
+        }
+        .icecream-text {
+            text-align: center;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            max-width: 500px;
+            line-height: 1.8;
+            color: rgba(200,215,255,0.85);
+        }
+        .icecream-text .yellow { color: var(--ice-cream-yellow); font-weight: 700; }
+
+        /* ===== GHIBLI QUOTE SECTION ===== */
+        #ghibli-section {
+            background: linear-gradient(180deg, var(--navy-mid), var(--navy), #0a1628);
+        }
+        .ghibli-card {
+            background: linear-gradient(135deg, rgba(27,58,107,0.5), rgba(10,22,40,0.8));
+            border: 1px solid rgba(72,202,228,0.2);
+            border-radius: 25px;
+            padding: 50px 40px;
+            max-width: 650px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .ghibli-card::before {
+            content: '✨';
+            position: absolute;
+            top: 15px; left: 20px;
+            font-size: 1.5rem;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        .ghibli-card::after {
+            content: '🌙';
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.5rem;
+        }
+        .ghibli-emoji { font-size: 4rem; margin-bottom: 20px; }
+        .ghibli-quote {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            color: var(--glow-blue);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .ghibli-source {
+            font-size: 0.95rem;
+            color: rgba(200,215,255,0.5);
+            font-style: italic;
+        }
+        .ghibli-personal {
+            margin-top: 25px;
+            font-size: 1.1rem;
+            color: rgba(200,215,255,0.8);
+            line-height: 1.8;
+        }
+
+        /* ===== THE QUESTION ===== */
+        #question-section {
+            background: linear-gradient(180deg, #0a1628, var(--navy-mid), var(--navy));
+            min-height: 100vh;
+        }
+        .question-title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2rem, 6vw, 4rem);
+            background: linear-gradient(135deg, var(--accent-pink), var(--jelly-purple), var(--glow-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .question-sub {
+            font-size: 1.1rem;
+            color: rgba(200,215,255,0.7);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .options-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 800px;
+        }
+        .option-btn {
+            padding: 20px 35px;
+            border-radius: 50px;
+            border: 2px solid;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 200px;
+        }
+        .option-yes {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-coral));
+            border-color: var(--accent-pink);
+            color: white;
+            box-shadow: 0 5px 25px rgba(255,107,138,0.3);
+        }
+        .option-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 40px rgba(255,107,138,0.5);
+        }
+        .option-maybe {
+            background: linear-gradient(135deg, var(--jelly-purple), #9d4edd);
+            border-color: var(--jelly-purple);
+            color: white;
+            box-shadow: 0 5px 25px rgba(199,125,255,0.3);
+        }
+        .option-maybe:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(199,125,255,0.5);
+        }
+        .option-watermelon {
+            background: linear-gradient(135deg, var(--watermelon-red), #e63956);
+            border-color: var(--watermelon-red);
+            color: white;
+            box-shadow: 0 5px 25px rgba(255,77,109,0.3);
+        }
+        .option-watermelon:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 40px rgba(255,77,109,0.5);
+        }
+        .option-no {
+            background: rgba(27,58,107,0.5);
+            border-color: rgba(72,202,228,0.3);
+            color: rgba(200,215,255,0.7);
+            transition: all 0.1s;
+            user-select: none;
+        }
+
+        /* ===== RESPONSE OVERLAY ===== */
+        .response-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(5,13,26,0.95);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+        .response-overlay.active {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .response-emoji {
+            font-size: 6rem;
+            margin-bottom: 20px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        .response-title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .response-text {
+            font-size: 1.2rem;
+            text-align: center;
+            max-width: 500px;
+            line-height: 1.8;
+            color: rgba(200,215,255,0.85);
+            margin-bottom: 30px;
+        }
+        .response-close {
+            padding: 12px 30px;
+            border-radius: 30px;
+            background: rgba(72,202,228,0.2);
+            border: 1px solid rgba(72,202,228,0.4);
+            color: var(--glow-blue);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .response-close:hover {
+            background: rgba(72,202,228,0.3);
+            transform: scale(1.05);
+        }
+
+        /* ===== CONFETTI ===== */
+        .confetti-piece {
+            position: fixed;
+            z-index: 1001;
+            pointer-events: none;
+            animation: confettiFall var(--dur) linear forwards;
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ===== HEARTS RAIN (YES response) ===== */
+        .heart-rain {
+            position: fixed;
+            z-index: 999;
+            pointer-events: none;
+            font-size: 1.5rem;
+            animation: heartFall var(--dur) linear forwards;
+        }
+        @keyframes heartFall {
+            0% { transform: translateY(-5vh) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg) scale(0.5); opacity: 0; }
+        }
+
+        /* ===== MUSIC TOGGLE ===== */
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(27,58,107,0.8);
+            border: 1px solid rgba(72,202,228,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .music-toggle:hover {
+            transform: scale(1.1);
+            border-color: rgba(72,202,228,0.6);
+        }
+
+        /* ===== NAV DOTS ===== */
+        .nav-dots {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(72,202,228,0.3);
+            border: 1px solid rgba(72,202,228,0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .nav-dot.active {
+            background: var(--glow-blue);
+            box-shadow: 0 0 10px rgba(72,202,228,0.5);
+            transform: scale(1.3);
+        }
+        .nav-dot:hover { background: rgba(72,202,228,0.6); }
+
+        /* ===== JELLY BOUNCE LETTERS ===== */
+        .jelly-letter {
+            display: inline-block;
+            animation: jellyBounce 0.6s ease;
+            animation-fill-mode: both;
+        }
+        @keyframes jellyBounce {
+            0% { transform: scale(0) translateY(40px); opacity: 0; }
+            50% { transform: scale(1.3) translateY(-10px); }
+            70% { transform: scale(0.9) translateY(5px); }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== VALENTINE DATE ===== */
+        .date-badge {
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 30px;
+            background: rgba(255,107,138,0.15);
+            border: 1px solid rgba(255,107,138,0.3);
+            color: var(--accent-pink);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .cards-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+            .love-card { padding: 20px 15px; }
+            .love-card .emoji { font-size: 2.2rem; }
+            .options-container { flex-direction: column; align-items: center; }
+            .option-btn { width: 80%; text-align: center; }
+            .nav-dots { display: none; }
+            .ghibli-card { padding: 30px 25px; }
+            .icecream-container { gap: 25px; }
+        }
+
+        /* ===== FLOATING EMOJIS DECORATION ===== */
+        .float-emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.15;
+            animation: floatAround var(--dur) ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(20px, -30px) rotate(10deg); }
+            66% { transform: translate(-15px, -15px) rotate(-5deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Stars -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Bubbles -->
+    <div class="bubbles-container" id="bubbles"></div>
+
+    <!-- Jellyfish Background -->
+    <div class="jellyfish-container" id="jellyfish-bg"></div>
+
+    <!-- Nav Dots -->
+    <div class="nav-dots" id="navDots"></div>
+
+    <!-- ===== SECTION 1: HERO ===== -->
+    <section id="hero">
+        <div class="envelope-icon">🪼</div>
+        <div class="date-badge">💌 Valentine's Day 2026 💌</div>
+        <h1 class="hero-title">Hey, You...</h1>
+        <p class="hero-sub">
+            I made this little corner of the ocean just for you 💙<br>
+            Scroll down and drift through it with me~
+        </p>
+        <div class="scroll-indicator" onclick="document.getElementById('love-section').scrollIntoView({behavior:'smooth'})">
+            🫧<br>
+            <span style="font-size:1rem; color: rgba(200,215,255,0.5);">scroll down</span>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 2: THINGS I LOVE ===== -->
+    <section id="love-section">
+        <h2 class="section-title reveal">Things That Make You, You 💫</h2>
+        <div class="cards-grid">
+            <div class="love-card reveal" style="animation-delay: 0.1s">
+                <span class="emoji">🪼</span>
+                <p class="card-text">Your love for jellyfish is the cutest thing ever — just like you, graceful & glowing</p>
+            </div>
+            <div class="love-card reveal" style="animation-delay: 0.2s">
+                <span class="emoji">🍉</span>
+                <p class="card-text">Watermelon lover! Sweet on the inside with a tough little shell</p>
+            </div>
+            <div class="love-card reveal" style="animation-delay: 0.3s">
+                <span class="emoji">🍦</span>
+                <p class="card-text">Your ice cream obsession is adorable — you make every day feel like summer</p>
+            </div>
+            <div class="love-card reveal" style="animation-delay: 0.4s">
+                <span class="emoji">🍮</span>
+                <p class="card-text">Soft like jelly, wobbly cute, and absolutely delightful!</p>
+            </div>
+            <div class="love-card reveal" style="animation-delay: 0.5s">
+                <span class="emoji">🌊</span>
+                <p class="card-text">Your love for navy blue — deep like the ocean, beautiful like midnight</p>
+            </div>
+            <div class="love-card reveal" style="animation-delay: 0.6s">
+                <span class="emoji">✨</span>
+                <p class="card-text">Your playful spirit makes the whole world feel like a Ghibli movie</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 3: JELLYFISH MESSAGE ===== -->
+    <section id="jellyfish-section">
+        <div class="reveal">
+            <div class="big-jellyfish">
+                <div class="head"></div>
+                <div class="tentacles">
+                    <div class="tentacle" style="--t:0"></div>
+                    <div class="tentacle" style="--t:1"></div>
+                    <div class="tentacle" style="--t:2"></div>
+                    <div class="tentacle" style="--t:3"></div>
+                    <div class="tentacle" style="--t:4"></div>
+                    <div class="tentacle" style="--t:5"></div>
+                    <div class="tentacle" style="--t:6"></div>
+                    <div class="tentacle" style="--t:7"></div>
+                </div>
+            </div>
+        </div>
+        <p class="jelly-message reveal">
+            You know how jellyfish just <span class="highlight">glow</span> in the dark ocean?<br><br>
+            That's what you do to my world ✨<br><br>
+            You light up everything around you without even trying,
+            and being close to you feels like floating through the
+            <span class="highlight">most magical deep sea</span> 🌊💙
+        </p>
+    </section>
+
+    <!-- ===== SECTION 4: WATERMELON ===== -->
+    <section id="watermelon-section">
+        <div class="reveal">
+            <div class="watermelon-slice"></div>
+        </div>
+        <p class="sweet-text reveal">"You're one in a melon!" 🍉</p>
+        <p class="sweet-sub reveal">
+            Seriously though... out of all the people in this world,
+            you're the sweetest slice I've ever known.
+            And I don't share watermelon with just anyone! 💙
+        </p>
+    </section>
+
+    <!-- ===== SECTION 5: ICE CREAM ===== -->
+    <section id="icecream-section">
+        <h2 class="section-title reveal">If You Were An Ice Cream... 🍦</h2>
+        <div class="icecream-container reveal">
+            <div class="icecream">
+                <div class="icon">🍨</div>
+                <div class="flavor">Sweet</div>
+            </div>
+            <div class="icecream">
+                <div class="icon">🍧</div>
+                <div class="flavor">Colorful</div>
+            </div>
+            <div class="icecream">
+                <div class="icon">🍦</div>
+                <div class="flavor">Irresistible</div>
+            </div>
+        </div>
+        <p class="icecream-text reveal">
+            You'd be the flavor that <span class="yellow">everyone wants</span> but
+            only I'd wait in line for, no matter how long 💛<br><br>
+            Every moment with you is a scoop of happiness~
+        </p>
+    </section>
+
+    <!-- ===== SECTION 6: GHIBLI ===== -->
+    <section id="ghibli-section">
+        <div class="ghibli-card reveal">
+            <div class="ghibli-emoji">🏰</div>
+            <p class="ghibli-quote">
+                "Once you've met someone, you never really forget them."
+            </p>
+            <p class="ghibli-source">— Spirited Away</p>
+            <p class="ghibli-personal">
+                Every Ghibli movie has that one magical moment
+                where everything just feels <em>right</em>...<br><br>
+                That's how I feel when I'm with you 💙<br>
+                You're my real-life Ghibli magic ✨🌙
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 7: THE BIG QUESTION ===== -->
+    <section id="question-section">
+        <div class="reveal">
+            <h2 class="question-title" id="questionTitle">Will You Be My Valentine? 💙</h2>
+            <p class="question-sub">Pick your answer~ (choose wisely! 🪼)</p>
+        </div>
+        <div class="options-container reveal" id="optionsContainer">
+            <button class="option-btn option-yes" onclick="showResponse('yes')">
+                🪼 Yes, obviously!
+            </button>
+            <button class="option-btn option-watermelon" onclick="showResponse('watermelon')">
+                🍉 Only if there's watermelon
+            </button>
+            <button class="option-btn option-maybe" onclick="showResponse('maybe')">
+                🍦 Hmm, buy me ice cream first
+            </button>
+            <button class="option-btn option-no" id="noBtn" onmouseover="runAway()" onclick="runAway()">
+                😤 No way!
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== RESPONSE OVERLAYS ===== -->
+    <div class="response-overlay" id="response-yes">
+        <div class="response-emoji">🪼💙✨</div>
+        <h2 class="response-title" style="background: linear-gradient(135deg, var(--accent-pink), var(--glow-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            YAAAY!! 🎉
+        </h2>
+        <p class="response-text">
+            You just made me the happiest jellyfish in the whole ocean!! 🌊💙<br><br>
+            I promise to keep you smiling, share all my watermelon with you,
+            and watch every Ghibli movie together until we fall asleep ✨🍉🍦<br><br>
+            Happy Valentine's Day 2026, my favorite person 💙
+        </p>
+        <button class="response-close" onclick="closeResponse('yes')">🪼 Float back ~</button>
+    </div>
+
+    <div class="response-overlay" id="response-watermelon">
+        <div class="response-emoji">🍉🍉🍉</div>
+        <h2 class="response-title" style="color: var(--watermelon-red);">
+            DEAL!! 🤝
+        </h2>
+        <p class="response-text">
+            I'll bring the BIGGEST watermelon you've ever seen!! 🍉<br><br>
+            We'll eat watermelon under the stars, watch Howl's Moving Castle,
+            and pretend we're in our own little Ghibli world~<br><br>
+            So... that's a YES right?! 💙✨
+        </p>
+        <button class="response-close" onclick="closeResponse('watermelon')">🍉 Sounds good ~</button>
+    </div>
+
+    <div class="response-overlay" id="response-maybe">
+        <div class="response-emoji">🍦🍦🍦</div>
+        <h2 class="response-title" style="color: var(--ice-cream-yellow);">
+            Say Less!! 🏃‍♂️💨
+        </h2>
+        <p class="response-text">
+            I'm already running to get you ALL the ice cream flavors!! 🍦🍨🍧<br><br>
+            Strawberry? Vanilla? That weird blue one? YES TO ALL!<br><br>
+            Now please... be my valentine?? 🥺💙<br>
+            (I'll throw in some jelly too! 🍮)
+        </p>
+        <button class="response-close" onclick="closeResponse('maybe')">🍦 Fine, you got me ~</button>
+    </div>
+
+    <script>
+        // ===== GENERATE STARS =====
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 120; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 3 + 1;
+                star.style.cssText = `
+                    width: ${size}px; height: ${size}px;
+                    left: ${Math.random() * 100}%; top: ${Math.random() * 100}%;
+                    --dur: ${Math.random() * 3 + 2}s;
+                    animation-delay: ${Math.random() * 3}s;
+                `;
+                container.appendChild(star);
+            }
+        }
+
+        // ===== GENERATE BUBBLES =====
+        function createBubbles() {
+            const container = document.getElementById('bubbles');
+            for (let i = 0; i < 20; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 30 + 10;
+                bubble.style.cssText = `
+                    width: ${size}px; height: ${size}px;
+                    left: ${Math.random() * 100}%;
+                    --dur: ${Math.random() * 10 + 8}s;
+                    --delay: ${Math.random() * 10}s;
+                `;
+                container.appendChild(bubble);
+            }
+        }
+
+        // ===== GENERATE BACKGROUND JELLYFISH =====
+        function createJellyfish() {
+            const container = document.getElementById('jellyfish-bg');
+            const colors = [
+                ['rgba(199,125,255,0.6)', 'rgba(72,202,228,0.4)'],
+                ['rgba(255,143,171,0.5)', 'rgba(199,125,255,0.4)'],
+                ['rgba(72,202,228,0.5)', 'rgba(78,203,113,0.3)'],
+                ['rgba(255,230,109,0.4)', 'rgba(255,143,171,0.4)'],
+            ];
+            for (let i = 0; i < 6; i++) {
+                const jf = document.createElement('div');
+                jf.className = 'jellyfish';
+                const size = Math.random() * 40 + 30;
+                const [c1, c2] = colors[Math.floor(Math.random() * colors.length)];
+                jf.style.cssText = `
+                    --size: ${size}px; --jcolor1: ${c1}; --jcolor2: ${c2};
+                    left: ${Math.random() * 90 + 5}%;
+                    top: ${Math.random() * 80 + 10}%;
+                    --dur: ${Math.random() * 8 + 6}s;
+                    --delay: ${Math.random() * 5}s;
+                `;
+                let tentaclesHTML = '';
+                const numT = Math.floor(Math.random() * 4) + 5;
+                for (let t = 0; t < numT; t++) {
+                    tentaclesHTML += `<div class="tentacle" style="--t:${t}"></div>`;
+                }
+                jf.innerHTML = `<div class="head"></div><div class="tentacles">${tentaclesHTML}</div>`;
+                container.appendChild(jf);
+            }
+        }
+
+        // ===== NAV DOTS =====
+        function createNavDots() {
+            const sections = document.querySelectorAll('section');
+            const container = document.getElementById('navDots');
+            sections.forEach((sec, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot';
+                dot.onclick = () => sec.scrollIntoView({ behavior: 'smooth' });
+                container.appendChild(dot);
+            });
+        }
+
+        // ===== SCROLL REVEAL =====
+        function handleScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const dots = document.querySelectorAll('.nav-dot');
+            const sections = document.querySelectorAll('section');
+
+            reveals.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    el.classList.add('visible');
+                }
+            });
+
+            let activeIndex = 0;
+            sections.forEach((sec, i) => {
+                const rect = sec.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.5) activeIndex = i;
+            });
+            dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
+        }
+
+        // ===== NO BUTTON RUN AWAY =====
+        let noRunCount = 0;
+        const funnyTexts = [
+            "😤 No way!",
+            "🏃 Can't catch me!",
+            "🙈 Okay okay...",
+            "😵‍💫 Stop chasing!",
+            "🪼 Even jellyfish say yes!",
+            "🍉 Watermelon says yes!",
+            "🍦 Ice cream says yes!",
+            "😭 Pleeeease?",
+            "💙 Just say yes already!",
+            "🥺 Pretty please??"
+        ];
+        function runAway() {
+            const btn = document.getElementById('noBtn');
+            const container = document.getElementById('optionsContainer');
+            const containerRect = container.getBoundingClientRect();
+
+            noRunCount++;
+            btn.textContent = funnyTexts[Math.min(noRunCount, funnyTexts.length - 1)];
+
+            // Make YES button bigger each time
+            const yesBtn = document.querySelector('.option-yes');
+            const newScale = 1 + (noRunCount * 0.08);
+            yesBtn.style.transform = `scale(${Math.min(newScale, 1.6)})`;
+
+            // Random position within viewport
+            const maxX = window.innerWidth - 200;
+            const maxY = window.innerHeight - 60;
+            const randX = Math.random() * maxX;
+            const randY = Math.random() * maxY;
+
+            btn.style.position = 'fixed';
+            btn.style.left = randX + 'px';
+            btn.style.top = randY + 'px';
+            btn.style.zIndex = '999';
+            btn.style.transition = 'all 0.3s ease';
+
+            // After many attempts, shrink and hide
+            if (noRunCount >= 8) {
+                btn.style.transform = `scale(${1 - (noRunCount - 7) * 0.2})`;
+                btn.style.opacity = Math.max(0, 1 - (noRunCount - 7) * 0.3);
+            }
+            if (noRunCount >= 10) {
+                btn.style.display = 'none';
+            }
+        }
+
+        // ===== SHOW RESPONSE =====
+        function showResponse(type) {
+            const overlay = document.getElementById(`response-${type}`);
+            overlay.classList.add('active');
+
+            if (type === 'yes') {
+                createHearts();
+                createConfetti();
+            } else {
+                createConfetti();
+            }
+        }
+
+        function closeResponse(type) {
+            document.getElementById(`response-${type}`).classList.remove('active');
+        }
+
+        // ===== CONFETTI =====
+        function createConfetti() {
+            const emojis = ['💙', '🪼', '🍉', '🍦', '🍮', '✨', '💫', '🌊', '🫧', '💜'];
+            for (let i = 0; i < 60; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti-piece';
+                confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                confetti.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    top: -5%;
+                    font-size: ${Math.random() * 20 + 14}px;
+                    --dur: ${Math.random() * 3 + 2}s;
+                    animation-delay: ${Math.random() * 2}s;
+                `;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // ===== HEARTS RAIN =====
+        function createHearts() {
+            const hearts = ['💙', '💜', '🩵', '💗', '🤍'];
+            for (let i = 0; i < 40; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-rain';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    --dur: ${Math.random() * 4 + 3}s;
+                    animation-delay: ${Math.random() * 3}s;
+                    font-size: ${Math.random() * 20 + 16}px;
+                `;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 7000);
+            }
+        }
+
+        // ===== INIT =====
+        createStars();
+        createBubbles();
+        createJellyfish();
+        createNavDots();
+        window.addEventListener('scroll', handleScrollReveal);
+        handleScrollReveal();
+
+        // ===== PARALLAX JELLYFISH =====
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const jellyBg = document.getElementById('jellyfish-bg');
+            jellyBg.style.transform = `translateY(${scrollY * 0.15}px)`;
+        });
+
+        // ===== EASTER EGG: Konami-ish code for extra jellyfish =====
+        let clickCount = 0;
+        document.querySelector('.big-jellyfish')?.addEventListener('click', () => {
+            clickCount++;
+            if (clickCount >= 3) {
+                createConfetti();
+                clickCount = 0;
+            }
+        });
+    </script>
+</body>
+</html>
